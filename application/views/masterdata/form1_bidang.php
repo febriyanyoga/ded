@@ -17,17 +17,17 @@
                                 </ol>
                             </div>
                             <div>
-                                <h6 class="card-header white">SKPA = Nama Peraturan</h6>
+                                <h6 class="card-header white">SKPA = <?php echo $nama_peraturan;?></h6>
                             </div>
-                            <form class="card-footer white" action="
-								<?php echo base_url('Masterdata/inputbagian')?>" method="post">
+                            <form class="card-footer white" id="my_form" action="<?php echo base_url('Masterdata/inputBidang/').$id_peraturan?>" method="post">
                                 <div class="input-group col-md-12">
                                     <div>
                                         <h6 class="card-header white"> Tambahkan Bidang</h6>
                                     </div>
-                                    <input type="hidden" class="form-control form-control-lg" name="id" id="id">
+                                    <input name="id_peraturan" id="id_peraturan" type="hidden" class="form-control form-control-lg" value="<?php echo $id_peraturan?>">
                                     <input name="bidang" id="bidang" type="text" class="form-control" placeholder="Nama Bidang">
                                     <div class="input-group-btn"></div>
+                                    <input class="btn btn-info" type="submit" id="submit" name="submit" value="Simpan">
                                 </div>
                             </form>
                             <table class="table table-bordered table-hover data-tables" data-options='{ "paging": false; "searching":false}'>
@@ -40,30 +40,66 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td class="text-center">1</td>
-                                        <td class="text-center">Nama Bidang</td>
-                                        <td class="text-center">
-                                            <a href="
-														<?php echo site_url('masterdata/form2_biro'); ?>"> 
-														<i class="btn btn-success btn-sm">Biro</i>
+                                    <?php
+                                    $i=0;
+                                    foreach ($bidang as $bid) {
+                                        $i++;
+                                        ?>
+                                        <tr>
+                                            <td><?php echo $i;?></td>
+                                            <td><?php echo $bid->nama_bidang;?></td>
+                                            <td class="text-center">
+                                                <?php
+                                                if($nama_peraturan == "Sekretariat Daerah"){
+                                                    ?>
+                                                    <a href="<?php echo site_url('masterdata/form2_biro/').$bid->id_bidang;?>"> <i class="btn btn-success btn-sm">Biro</i></a>
+                                                    <?php
+                                                }else{
+                                                    ?>
+                                                    
+                                                    <a href="<?php echo site_url('masterdata/form2_bagian'); ?>"><i class="btn btn-success btn-sm">Bagian</i>
                                                     </a>
-                                            <a href="
-														<?php echo site_url('masterdata/form2_bagian'); ?>"> 
-														<i class="btn btn-success btn-sm">Bagian</i>
-                                                    </a>
-                                        </td>
-                                        <td class="text-center">
-                                            <a href="
-														<?php echo site_url('masterdata/form2_bagian'); ?>" class="btn-fab btn-fab-sm btn-success r-5" data-toggle="modal" data-target="#myModal">
-														<i class="icon-edit" aria-hidden="true"></i>
-													</a>
-                                            <a href="
-														<?php echo site_url('masterdata/form2_bagian'); ?>" class="btn-fab btn-fab-sm btn-success r-5">
-														<i class="icon-remove" aria-hidden="true"></i>
-													</a>
-                                        </td>
-                                    </tr>
+                                                    <?php
+                                                }
+                                                ?>
+                                            </td>
+                                            <td class="text-center">
+                                                <a class="btn-fab btn-fab-sm btn-success r-5" data-toggle="modal" data-target="#myModal-<?php echo $bid->id_bidang?>" title="ubah"><i class="icon-edit" aria-hidden="true"></i></a>
+                                                <a href="<?php echo site_url('Masterdata/post_delete/').$bid->id_bidang."/".$id_peraturan; ?>" class="btn-fab btn-fab-sm btn-danger r-5" onClick="return confirm('Anda yakin akan menghapus <?php echo $bid->nama_bidang?>?')"> <i class="icon-trash" aria-hidden="true"></i></a>
+                                            </td>
+                                        </tr>
+
+                                        <div class="modal" id="myModal-<?php echo $bid->id_bidang?>">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+
+                                                    <!-- Modal Header -->
+                                                    <div class="modal-header">
+                                                        <h4 class="modal-title">Edit data bidang</h4>
+                                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                    </div>
+                                                    <form action="<?php echo site_url('Masterdata/post_update/').$id_peraturan?>" method="post">
+                                                        <!-- Modal body -->
+                                                        <div class="modal-body">
+                                                            <div class="form-group focused">
+                                                                <input class="form-control" type="hidden" placeholder="ID Bidang" name="id_bidang" value="<?php echo $bid->id_bidang?>" required >
+                                                                <input  class="form-control" type="text" name="nama_bidang" value="<?php echo $bid->nama_bidang?>" required>
+                                                            </div>
+                                                        </div>
+
+                                                        <!-- Modal footer -->
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Batal</button>
+                                                            <input type="submit" name="submit" class="btn btn-success " value="Simpan">
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <?php
+                                    }
+                                    ?>
+
                                 </tbody>
                             </table>
                         </div>
@@ -73,29 +109,14 @@
         </div>
     </div>
 </div>
-<div class="modal" id="myModal">
-    <div class="modal-dialog">
-        <div class="modal-content">
 
-            <!-- Modal Header -->
-            <div class="modal-header">
-                <h4 class="modal-title">Edit data bidang</h4>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-            </div>
-
-            <!-- Modal body -->
-            <div class="modal-body">
-                <div class="form-group focused">
-                    <input class="form-control" type="text" placeholder="Nama Bidang">
-                </div>
-            </div>
-
-            <!-- Modal footer -->
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Batal</button>
-                <button type="button" class="btn btn-success " data-dismiss="modal">Simpan</button>
-            </div>
-
-        </div>
-    </div>
-</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript">
+    $('#my_form').keydown(function() {
+        var key = e.which;
+        if (key == 13) {
+// As ASCII code for ENTER key is "13"
+            $('#my_form').submit(); // Submit form code
+        }
+    });
+</script>

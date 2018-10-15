@@ -99,5 +99,29 @@ class Masterdata_m extends CI_Model
         $this->db->delete($this->table);
     }
 
+    function input($table, $data){
+        $this->db->insert($table, $data);
+        return TRUE;
+    }
+
+    function get_all_data($table){
+        return $this->db->get($table);
+    }
+
+    function get_all_data_by_id($table, $id, $id_table){
+        $this->db->where($id_table, $id);
+        return $this->db->get($table);
+    }
+
+    function update_data($table, $id_table, $id, $data)
+    {
+        $this->db->where($id_table, $id);
+        $this->db->update($table, $data);
+    }
+
+    function hapus($table, $id_table, $id){
+        $this->db->where($id_table, $id);
+        $this->db->delete($table);
+    }
 }
 
