@@ -1,0 +1,2 @@
+[05-Sep-2018 15:59:45 Asia/Krasnoyarsk] PHP Fatal error:  Can't use method return value in write context in /home/arnawa/public_html/ded/application/helpers/racode_helper.php on line 45
+[05-Sep-2018 09:00:26 UTC] PHP Fatal error:  Call to undefined function mysqli_init() in /home/arnawa/public_html/ded/system/database/drivers/mysqli/mysqli_driver.php on line 135
