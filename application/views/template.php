@@ -1,162 +1,266 @@
 <!DOCTYPE html>
-<html lang="zxx">
+<html dir="ltr" lang="en">
+
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="<?php echo base_url()?>assets/img/basic/favicon.ico" type="image/x-icon">
-    <title><?php echo getInfoRS('nama_rumah_sakit')?></title>
-    <!-- CSS -->
-    <link rel="stylesheet" href="<?php echo base_url()?>assets/css/app.css">
-    <style>
-        .loader {
-            position: fixed;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: #F5F8FA;
-            z-index: 9998;
-            text-align: center;
-        }
-
-        .plane-container {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-        }
-    </style>
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="<?php echo base_url()?>assets/assets/images/favicon.png">
+    <title><?php echo getInfoRS('nama_sistem')?></title>
+    <!-- Custom CSS -->
+    <link href="<?php echo base_url()?>assets/assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="<?php echo base_url()?>assets/dist/css/style.min.css" rel="stylesheet">
 </head>
-<body class="light">
-<!-- Pre loader -->
-<div id="loader" class="loader">
-    <div class="plane-container">
-        <div class="preloader-wrapper small active">
-            <div class="spinner-layer spinner-blue">
-                <div class="circle-clipper left">
-                    <div class="circle"></div>
-                </div><div class="gap-patch">
-                <div class="circle"></div>
-            </div><div class="circle-clipper right">
-                <div class="circle"></div>
-            </div>
-            </div>
 
-            <div class="spinner-layer spinner-red">
-                <div class="circle-clipper left">
-                    <div class="circle"></div>
-                </div><div class="gap-patch">
-                <div class="circle"></div>
-            </div><div class="circle-clipper right">
-                <div class="circle"></div>
-            </div>
-            </div>
+<body>
+    <!-- ============================================================== -->
+    <!-- Preloader - style you can find in spinners.css -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- Main wrapper - style you can find in pages.scss -->
+    <!-- ============================================================== -->
+    <div id="main-wrapper">
+        <!-- ============================================================== -->
+        <!-- Topbar header - style you can find in pages.scss -->
+        <!-- ============================================================== -->
+        <header class="topbar">
+            <nav class="navbar top-navbar navbar-expand-md navbar-dark">
+                <div class="navbar-header">
+                    <!-- This is for the sidebar toggle which is visible on mobile only -->
+                    <a class="nav-toggler waves-effect waves-light d-block d-md-none" href="javascript:void(0)">
+                        <i class="ti-menu ti-close"></i>
+                    </a>
+                    <!-- ============================================================== -->
+                    <!-- Logo -->
+                    <!-- ============================================================== -->
+                    <a class="navbar-brand" href="index.html">
+                        <!-- Logo icon -->
+    
+                        <span class="logo-text">
+                           
+                        </span>
+                    </a>
+                    <!-- ============================================================== -->
+                    <!-- End Logo -->
+                    <!-- ============================================================== -->
+                    <!-- ============================================================== -->
+                    <!-- Toggle which is visible on mobile only -->
+                    <!-- ============================================================== -->
+                    <a class="topbartoggler d-block d-md-none waves-effect waves-light" href="javascript:void(0)" data-toggle="collapse" data-target="#navbarSupportedContent"
+                        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="ti-more"></i>
+                    </a>
+                </div>
+                <!-- ============================================================== -->
+                <!-- End Logo -->
+                <!-- ============================================================== -->
+                <div class="navbar-collapse collapse" id="navbarSupportedContent">
+                    <!-- ============================================================== -->
+                    <!-- toggle and nav items -->
+                    <!-- ============================================================== -->
+                    <ul class="navbar-nav float-left mr-auto">
 
-            <div class="spinner-layer spinner-yellow">
-                <div class="circle-clipper left">
-                    <div class="circle"></div>
-                </div><div class="gap-patch">
-                <div class="circle"></div>
-            </div><div class="circle-clipper right">
-                <div class="circle"></div>
-            </div>
-            </div>
 
-            <div class="spinner-layer spinner-green">
-                <div class="circle-clipper left">
-                    <div class="circle"></div>
-                </div><div class="gap-patch">
-                <div class="circle"></div>
-            </div><div class="circle-clipper right">
-                <div class="circle"></div>
-            </div>
-            </div>
-        </div>
-    </div>
-</div>
-<div id="app">
-<aside class="main-sidebar fixed offcanvas shadow">
-    <section class="sidebar">
-        <div class="w-75px mt-3 mb-3 ml-3">
-        <h4>DASHBOARD ADMIN</h4>
-        </div>
+                    </ul>
+                    <!-- ============================================================== -->
+                    <!-- Right side toggle and nav items -->
+                    <!-- ============================================================== -->
+                    <ul class="navbar-nav float-right">
+                        <!-- ============================================================== -->
+                        <!-- Search -->
+                        <!-- ============================================================== -->
+                        <li class="nav-item search-box">
+                            <a class="nav-link waves-effect waves-dark" href="javascript:void(0)">
+                                <i class="ti-search font-16"></i>
+                            </a>
+                            <form class="app-search position-absolute">
+                                <input type="text" class="form-control" placeholder="Search &amp; enter">
+                                <a class="srh-btn">
+                                    <i class="ti-close"></i>
+                                </a>
+                            </form>
+                        </li>
 
-        <?php $this->load->view('template/sidebar'); ?>
-    </section>
-</aside>
-<!--Sidebar End-->
-<div class="has-sidebar-left">
-    <div class="pos-f-t">
-    <div class="collapse" id="navbarToggleExternalContent">
-        <div class="bg-dark pt-2 pb-2 pl-4 pr-2">
-            <div class="search-bar">
-                <input class="transparent s-24 text-white b-0 font-weight-lighter w-128 height-50" type="text"
-                       placeholder="start typing...">
+                        <!-- ============================================================== -->
+                        <!-- User profile and search -->
+                        <!-- ============================================================== -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="" data-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false">
+                                <img src="<?php echo base_url()?>assets/img/dummy/u1.png" alt="user" class="rounded-circle" width="31">
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right user-dd animated flipInY">
+                                <span class="with-arrow">
+                                    <span class="bg-primary"></span>
+                                </span>
+                                <div class="d-flex no-block align-items-center p-15 bg-primary text-white m-b-10">
+                                    <div class="">
+                                        <img src="<?php echo base_url()?>assets/img/dummy/u1.png" alt="user" class="img-circle" width="60">
+                                    </div>
+                                    <div class="m-l-10">
+                                        <h4 class="m-b-0">admin</h4>
+                                        <p class=" m-b-0">email@gmail.com</p>
+                                    </div>
+                                </div>
+                            
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="javascript:void(0)">
+                                    <i class="fa fa-power-off m-r-5 m-l-5"></i> Logout</a>
+                                <div class="dropdown-divider"></div>
+                            </div>
+                        </li>
+                        <!-- ============================================================== -->
+                        <!-- User profile and search -->
+                        <!-- ============================================================== -->
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <!-- ============================================================== -->
+        <!-- End Topbar header -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Left Sidebar - style you can find in sidebar.scss  -->
+        <!-- ============================================================== -->
+        <aside class="left-sidebar">
+            <!-- Sidebar scroll-->
+            <div class="scroll-sidebar">
+                <!-- Sidebar navigation-->
+                <nav class="sidebar-nav">
+                    <ul id="sidebarnav">
+                        <br>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<?php echo base_url()?>beranda" aria-expanded="false">
+                                <i class="icon-Car-Wheel"></i>
+                                <span class="hide-menu">Dashboards </span>
+                            </a>
+                        </li>
+                        <li class="nav-small-cap">
+                            <i class="mdi mdi-dots-horizontal"></i>
+                            <span class="hide-menu">Master Data</span>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<?php echo base_url()?>skpa
+                                   " aria-expanded="false">
+                                <i class="icon-Receipt"></i>
+                                <span class="hide-menu">Data SKPA</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<?php echo base_url()?>ded
+                                   " aria-expanded="false">
+                                <i class="icon-Receipt"></i>
+                                <span class="hide-menu">Data DED</span>
+                            </a>
+                        </li>
+                        <li class="nav-small-cap">
+                            <i class="mdi mdi-dots-horizontal"></i>
+                            <span class="hide-menu">Monitoring</span>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<?php echo base_url()?>monitoring
+                                   " aria-expanded="false">
+                                <i class="mdi mdi-content-paste"></i>
+                                <span class="hide-menu">SKPA Note</span>
+                            </a>
+                        </li>
+                        <li class="nav-small-cap">
+                            <i class="mdi mdi-dots-horizontal"></i>
+                            <span class="hide-menu">Pengaturan</span>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<?php echo base_url()?>user
+                                   " aria-expanded="false">
+                                <i class="icon-Add-User"></i>
+                                <span class="hide-menu">Data User</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<?php echo base_url()?>profile/update/1
+                                   " aria-expanded="false">
+                                <i class="icon-Wrench"></i>
+                                <span class="hide-menu">Data sistem</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="authentication-login1.html
+                                   " aria-expanded="false">
+                                <i class="mdi mdi-directions"></i>
+                                <span class="hide-menu">Log Out</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+                <!-- End Sidebar navigation -->
             </div>
-            <a href="#" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-expanded="false"
-               aria-label="Toggle navigation" class="paper-nav-toggle paper-nav-white active "><i></i></a>
-        </div>
-    </div>
-</div>
-    <div class="sticky">
-        <div class="navbar navbar-expand navbar-dark d-flex justify-content-between bd-navbar blue accent-3">
-            <div class="relative">
-                <a href="#" data-toggle="offcanvas" class="paper-nav-toggle pp-nav-toggle">
-                    <i></i>
-                </a>
-            </div>
-            <!--Top Menu Start -->
-<div class="navbar-custom-menu p-t-10">
-    <ul class="nav navbar-nav">
-        <!-- Messages-->
-        <!-- End Messages-->
-        <!-- Notifications -->
-        <!-- End Notifications -->
-        <li>
-            <a class="nav-link " data-toggle="collapse" data-target="#navbarToggleExternalContent"
-               aria-controls="navbarToggleExternalContent"
-               aria-expanded="false" aria-label="Toggle navigation">
-            </a>
-        </li>
-        <!-- Right Sidebar Toggle Button -->
-
-        <!-- End Right Sidebar Toggle Button -->
-        <!-- User Account-->
-        <li class="dropdown custom-dropdown user user-menu">
-            <a href="#" class="nav-link" data-toggle="dropdown">
-                <img src="<?php echo base_url()?>assets/img/dummy/u1.png" class="user-image" alt="User Image">
-            </a>
-
-            <div class="dropdown-menu p-4"><a href="<?php echo base_url()?>auth/logout" class="btn btn-primary btn-lg" style="margin-left: 14px;"><i class="icon-signout" ></i> Log Out</a>
-            </div>
-        </li>
-    </ul>
-</div>
-        </div>
-    </div>
-</div>
-<div class="page has-sidebar-left height-full">
-    <header class="blue accent-3 relative nav-sticky">
-    </header>
-    <div class="container-fluid relative animatedParent animateOnce">
-        <div class="tab-content pb-3" id="v-pills-tabContent">
-
-            <?php
+            <!-- End Sidebar scroll-->
+        </aside>
+        <!-- ============================================================== -->
+        <!-- End Left Sidebar - style you can find in sidebar.scss  -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Page wrapper  -->
+        <!-- ============================================================== -->
+        <div class="page-wrapper">
+            <!-- Container fluid  -->
+            <!-- ============================================================== -->
+            <div class="container-fluid">
+                <!-- ============================================================== -->
+                <!-- Info box -->
+                <!-- ============================================================== -->
+                    <!-- column -->
+                    <div class="col-lg-12">
+                    <?php
             echo $contents;
             ?>
-
+                    </div>
+                </div>
+            </div>
+            <footer class="footer text-center">
+                Design by </a>.
+            </footer>
 
         </div>
     </div>
-</div>
-<!-- Right Sidebar -->
-<!-- /.right-sidebar -->
-<!-- Add the sidebar's background. This div must be placed
-         immediately after the control sidebar -->
-<div class="control-sidebar-bg shadow white fixed"></div>
-</div>
-<!--/#app -->
-<script src="<?php echo base_url()?>assets/js/app.js"></script>
+    <!-- ============================================================== -->
+    <!-- All Jquery -->
+    <!-- ============================================================== -->
+    <script src="<?php echo base_url()?>assets/assets/libs/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap tether Core JavaScript -->
+    <script src="<?php echo base_url()?>assets/assets/libs/popper.js/dist/umd/popper.min.js"></script>
+    <script src="<?php echo base_url()?>assets/assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- apps -->
+    <script src="<?php echo base_url()?>assets/dist/js/app.min.js"></script>
+    <script src="<?php echo base_url()?>assets/dist/js/app.init.js"></script>
+    <script src="<?php echo base_url()?>assets/dist/js/app-style-switcher.js"></script>
+    <!-- slimscrollbar scrollbar JavaScript -->
+    <script src="<?php echo base_url()?>assets/assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js"></script>
+    <script src="<?php echo base_url()?>assets/assets/extra-libs/sparkline/sparkline.js"></script>
+    <!--Wave Effects -->
+    <script src="<?php echo base_url()?>assets/dist/js/waves.js"></script>
+    <!--Menu sidebar -->
+    <script src="<?php echo base_url()?>assets/dist/js/sidebarmenu.js"></script>
+    <!--Custom JavaScript -->
+    <script src="<?php echo base_url()?>assets/dist/js/custom.min.js"></script>
+
+    <!--This page plugins -->
+    <script src="<?php echo base_url()?>assets/assets/extra-libs/DataTables/datatables.min.js"></script>
+    <script src="<?php echo base_url()?>/assets/dist/js/pages/datatable/datatable-advanced.init.js"></script>
+    <script src="<?php echo base_url()?>/assets/dist/js/pages/datatable/datatable-basic.init.js"></script>
+        <!-- start - This is for export functionality only -->
+    <script src="https://cdn.datatables.net/buttons/1.5.1/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.flash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.print.min.js"></script>
+    
 </body>
+
 </html>

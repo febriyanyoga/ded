@@ -14,13 +14,13 @@
     <ul class="sidebar-menu" data-widget="tree">    
         <li><?php echo anchor('beranda',"<i class='icon-home'></i> BERANDA");?></li>
         <?php if($_SESSION['id_user_level'] == '1') { ?>
-        <li><?php echo anchor('dede',"<i class='icon-book'></i> KELOLA DED");?></li>
-        <li><?php echo anchor('masterdata',"<i class='icon-user'></i> MASTER DATA");?></li>
+        <li><?php echo anchor('skpa',"<i class='icon-book'></i> KELOLA SKPA");?></li>
+        <li><?php echo anchor('ded',"<i class='icon-user'></i> KELOLA DED");?></li>
+        <li><?php echo anchor('monitoring',"<i class='icon-user'></i> MONITORING");?></li>
         <li><?php echo anchor('profile/update/1',"<i class='icon-cog'></i> PENGATURAN");?></li>
         <li><?php echo anchor('user',"<i class='icon-user'></i> PENGGUNA");?></li>
         <?php }?>
        
-        
         <?php
         // display all data main menu
         $this->db->where('is_main_menu',0);

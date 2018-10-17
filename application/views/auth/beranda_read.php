@@ -1,41 +1,17 @@
-<div class="card my-3 no-b">
-    <div class="card-body">
-        <div class="card-title">
-            <h2 class="text-center">Detail Data</h2>
-        </div><br>
-        <div class="text-right">
-            <a href="<?php echo site_url('beranda') ?>" class="btn btn-primary ">Kembali</a> </div> <br>
-        <table class="table">
-            <tr>
-                <td width="150px">Nama Peraturan</td>
-                <td>
-                    <?php echo $nama_peraturan; ?>
-                </td>
-            </tr>
-            <tr>
-                <td>Jumlah Unit</td>
-                <td>
-                    <?php echo $unit; ?>
-                </td>
-            </tr>
-            <tr>
-                <td>Jumlah Tupoksi</td>
-                <td>
-                    <?php echo $tupoksi; ?>
-                </td>
-            </tr>
-            <tr>
-                <td>Jumlah Database</td>
-                <td>
-                    <?php echo $jml_database; ?>
-                </td>
-            </tr>
-            <tr>
-                <td></td>
-            </tr>
-        </table>
-        <table class="table table-bordered table-hover data-tables" data-options='{ "paging": false; "searching":false}'>
-            <thead>
+<div class="card-title">
+    <h2 class="text-center"> Detail Data</h2>
+</div><br>
+
+<!-- File export -->
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Data DED</h4>
+                <h5 class="card-title">Regulasi = nama_regulasi</h5>
+                <div class="table-responsive">
+                    <table id="file_export" class="table table-striped table-bordered display">
+                    <thead>
                 <tr>
                     <th class="text-center">Bidang</th>
                     <th class="text-center">Biro</th>
@@ -75,9 +51,13 @@
                     </td>
                 </tr>
             </tbody>
-        </table>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
+
 <script src="<?php echo base_url('assets/js/jquery-1.11.2.min.js') ?>"></script>
 <script src="<?php echo base_url('assets/datatables/jquery.dataTables.js') ?>"></script>
 <script src="<?php echo base_url('assets/datatables/dataTables.bootstrap.js') ?>"></script>

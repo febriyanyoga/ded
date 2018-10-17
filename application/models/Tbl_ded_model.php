@@ -32,6 +32,14 @@ class Tbl_ded_model extends CI_Model
         return $this->db->get($this->table)->result();
     }
 
+    function get_all_ded(){
+        $this->db->select('*');
+        $this->db->from('tbl_ded');
+        $this->db->order_by('id', 'ASC');
+        $query = $this->db->get();
+        return $query;
+    }
+
     // get data by id
     function get_by_id($id)
     {
