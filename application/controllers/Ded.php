@@ -9,7 +9,7 @@ class Ded extends CI_Controller
     {
         parent::__construct();
         is_login();
-        $this->load->model('Masterdata_m');
+        $this->load->model(['Ded_m']);
         $this->load->library('form_validation');        
         $this->load->library('datatables');
         $this->load->helper('form', 'url');
@@ -20,226 +20,178 @@ class Ded extends CI_Controller
     public function index()
     {
         $data = array();
-        $data['ded'] = $this->Masterdata_m->get_all_ded()->result();
+        $data['ded'] = $this->Ded_m->get_all_ded_()->result();
         $this->template->load('template','ded/dedlist', $data);
     } 
     
-    public function json() {
-        header('Content-Type: application/json');
-        echo $this->Tbl_ded_model->json();
-    }
 
-    public function form1_bidang($id){
-        $data['id_peraturan']   = $id;
-        $id_table = 'id_peraturan';
-        $data['nama_peraturan'] = $this->Masterdata_m->get_all_data_by_id('tbl_ded', $id, 'id')->result()[0]->nama_peraturan;
-        $data['bidang'] = $this->Masterdata_m->get_all_data_by_id('tbl_bidang', $id, $id_table)->result();
-        $this->template->load('template','masterdata/form1_bidang', $data);
-    }
-
-    public function post_update($id_peraturan){
-        $this->form_validation->set_rules('bidang', 'nama bidang', 'required');
-        $this->form_validation->set_rules('id_bidang', 'id bidang', 'required');
-        if ($this->form_validation->run() == TRUE) {
-            echo "error";
-        }else{
-            $bidang             = $_POST['nama_bidang'];  
-            $id_bidang          = $_POST['id_bidang'];  
-            
-            $table = 'tbl_bidang';
-            $data = array(
-                'nama_bidang'   => $bidang,
-            );
-
-            $this->Masterdata_m->update_data($table,'id_bidang', $id_bidang, $data);
-            redirect('masterdata/form1_bidang/'.$id_peraturan);
-        }
-    }
-
-    public function post_delete($id, $id_peraturan){
-        $this->Masterdata_m->hapus('tbl_bidang', 'id_bidang', $id);
-        redirect('masterdata/form1_bidang/'.$id_peraturan);
-    }
-
-    public function deddetail() 
-    {
+    public function deddetail($id) 
+    {   
+        $data['skpa'] = $this->Ded_m->get_all_ded_by_id($id)->row();
+        $data['id_ded'] = $id;
+        $data['all_ded'] = $this->Ded_m->get_all_ded($id)->result();
         $this->template->load('template','ded/deddetail', $data);
     }
 
-    public function form2_bagian() 
-    {
-        $this->template->load('template','masterdata/form2_bagian', $data);
-    }
+    public function post_ded(){
+        $this->form_validation->set_rules('bidang','Bidang');
+        $this->form_validation->set_rules('biro','Biro');
+        $this->form_validation->set_rules('bagian','Bagian');
+        $this->form_validation->set_rules('subag','Sub bag');
+        $this->form_validation->set_rules('basisdata','Basisdata');
+        $this->form_validation->set_rules('parameter','Parameter');
+        $this->form_validation->set_rules('tipe','Tipe');
+        $this->form_validation->set_rules('panjang','Panjang');
+        $this->form_validation->set_rules('id_ded','ID DED','required');
 
-    public function form3_subagian() 
-    {
-        $this->template->load('template','masterdata/form3_subagian', $data);
-    }
-
-    public function form4_database() 
-    {
-        $this->template->load('template','masterdata/form4_database', $data);
-    }
-
-    public function form5_parameter() 
-    {
-        $this->template->load('template','masterdata/form5_parameter', $data);
-    }
-
-    public function create_action() 
-    {
-        $this->_rules();
-
-        if ($this->form_validation->run() == FALSE) {
-            $this->create();
-        } else {
-            $data = array(
-                'nama_peraturan' => $this->input->post('nama_peraturan',TRUE),
-                'unit' => $this->input->post('unit',TRUE),
-                'tupoksi' => $this->input->post('tupoksi',TRUE),
-                'jml_database' => $this->input->post('jml_database',TRUE),
-                'file_pdf' => $this->input->post('file_pdf',TRUE),
-            );
-
-            $config['upload_path'] = './uploads/';
-            $config['allowed_types'] = 'pdf|jpg|png';
-            $config['file_name'] = url_title($this->input->post('file_pdf',TRUE));
-            $this->load->library('upload', $config);
-            if (!$this->upload->do_upload('file_pdf')) {
-                $error = $this->upload->display_errors();
-            // menampilkan pesan error
-                print_r($error);
-            } else {
-                $data = array(
-                    'nama_peraturan' => $this->input->post('nama_peraturan',TRUE),
-                    'unit' => $this->input->post('unit',TRUE),
-                    'tupoksi' => $this->input->post('tupoksi',TRUE),
-                    'jml_database' => $this->input->post('jml_database',TRUE),
-                    'file_pdf'=>$this->upload->file_name,
-                );
-            }
-
-            $this->Tbl_ded_model->insert($data);
-            $this->session->set_flashdata('message', 'Create Record Success 2');
-            redirect(site_url('dede'));
-        }
-    }
-    
-    public function update($id) 
-    {
-        $row = $this->Tbl_ded_model->get_by_id($id);
-
-        if ($row) {
-            $data = array(
-                'button' => 'Update',
-                'action' => site_url('dede/update_action'),
-                'id' => set_value('id', $row->id),
-                'nama_peraturan' => set_value('nama_peraturan', $row->nama_peraturan),
-                'unit' => set_value('unit', $row->unit),
-                'tupoksi' => set_value('tupoksi', $row->tupoksi),
-                'jml_database' => set_value('jml_database', $row->jml_database),
-                'file_pdf' => set_value('file_pdf', $row->file_pdf),
-            );
-            $this->template->load('template','ded/tbl_ded_form', $data);
-        } else {
-            $this->session->set_flashdata('message', 'Record Not Found');
-            redirect(site_url('dede'));
-        }
-    }
-    
-    public function update_action() 
-    {
-        $this->_rules();
-
-        if ($this->form_validation->run() == FALSE) {
-            $this->update($this->input->post('id', TRUE));
-        } else {
-            $data = array(
-                'nama_peraturan' => $this->input->post('nama_peraturan',TRUE),
-                'unit' => $this->input->post('unit',TRUE),
-                'tupoksi' => $this->input->post('tupoksi',TRUE),
-                'jml_database' => $this->input->post('jml_database',TRUE),
-                'file_pdf' => $this->input->post('file_pdf',TRUE),
-            );
-            $config['upload_path'] = './uploads/';
-            $config['allowed_types'] = 'pdf|jpg|png';
-            $config['file_name'] = url_title($this->input->post('file_pdf',TRUE));
-            $this->load->library('upload', $config);
-            if (!$this->upload->do_upload('file_pdf')) {
-                $error = $this->upload->display_errors();
-            // menampilkan pesan error
-                print_r($error);
-            } else {
-                $data = array(
-                    'nama_peraturan' => $this->input->post('nama_peraturan',TRUE),
-                    'unit' => $this->input->post('unit',TRUE),
-                    'tupoksi' => $this->input->post('tupoksi',TRUE),
-                    'jml_database' => $this->input->post('jml_database',TRUE),
-                    'file_pdf'=>$this->upload->file_name,
-                );
-            }
-
-            $this->Tbl_ded_model->update($this->input->post('id', TRUE), $data);
-            $this->session->set_flashdata('message', 'Update Record Success');
-            redirect(site_url('dede'));
-        }
-    }
-    
-    public function delete($id) 
-    {
-        $row = $this->Tbl_ded_model->get_by_id($id);
-
-        if ($row) {
-            $this->Tbl_ded_model->delete($id);
-            $this->session->set_flashdata('message', 'Delete Record Success');
-            redirect(site_url('dede'));
-        } else {
-            $this->session->set_flashdata('message', 'Record Not Found');
-            redirect(site_url('dede'));
-        }
-    }
-
-    public function _rules() 
-    {
-        $this->form_validation->set_rules('nama_peraturan', 'nama peraturan', 'trim|required');
-        $this->form_validation->set_rules('unit', 'unit', 'trim|required');
-        $this->form_validation->set_rules('tupoksi', 'tupoksi', 'trim|required');
-        $this->form_validation->set_rules('jml_database', 'jumlah database', 'trim|required');
-        $this->form_validation->set_rules('jml_database', 'jumlah database', 'trim|required');
-
-        $this->form_validation->set_rules('id', 'id', 'trim');
-        $this->form_validation->set_error_delimiters('<span class="text-danger" style="font-size: 12px;">', '</span>');
-        $this->form_validation->set_message('nama peraturan', 'tidak boleh kosong');
-    }
-
-    
-    function autocomplate(){
-        autocomplate_json('tbl_ded', 'nama_peraturan');
-    }
-
-    function inputBidang($id){
-        // $bidang = $this->input->post('bidang');
-        $this->form_validation->set_rules('bidang', 'nama bidang', 'required');
-        $this->form_validation->set_rules('id_peraturan', 'id peraturan', 'required');
-        if ($this->form_validation->run() == FALSE) {
-            echo "error";
+        if($this->form_validation->run() == FALSE) {
+            $this->session->set_flashdata('error','Data anda tidak berhasil disimpan, cek data yang Anda masukkan');
+            redirect_back();  
         }else{
-            $bidang             = $_POST['bidang'];  
-            $id_peraturan       = $_POST['id_peraturan'];  
-            // $id_peraturan       = $this->input->post('id_peraturan');
-            // $bidang             = $this->input->post('bidang');
-            
-            $table = 'tbl_bidang';
+
             $data = array(
-                'nama_bidang'   => $bidang,
-                'id_peraturan'  => $id_peraturan,
+                'id_ded'        => $this->input->post('id_ded'), 
+                'bidang'        => $this->input->post('bidang'), 
+                'biro'          => $this->input->post('biro'), 
+                'bagian'        => $this->input->post('bagian'), 
+                'subag'         => $this->input->post('subag'), 
+                'basisdata'     => $this->input->post('basisdata'), 
+                'parameter'     => $this->input->post('parameter'), 
+                'tipe'          => $this->input->post('tipe'), 
+                'panjang'       => $this->input->post('panjang'), 
             );
 
-            $this->Masterdata_m->input($table, $data);
-            redirect('masterdata/form1_bidang/'.$id);
+            if($this->Ded_m->post_data_ded($data)){
+                $this->session->set_flashdata('sukses','Data anda berhasil disimpan');
+                redirect_back(); 
+            }else{
+                $this->session->set_flashdata('error','Data anda tidak berhasil disimpan');
+                redirect_back(); 
+            }
         }
     }
 
+    public function hapus_ded($id_detail){
+        if($this->Ded_m->hapus_detail($id_detail)){
+            $this->session->set_flashdata('sukses','Data anda berhasil dihapus');
+            redirect_back(); 
+        }else{
+            $this->session->set_flashdata('error','Data anda tidak berhasil dihapus');
+            redirect_back(); 
+        }
+    }
+
+    public function post_update_ded(){
+        $this->form_validation->set_rules('bidang','Bidang');
+        $this->form_validation->set_rules('biro','Biro');
+        $this->form_validation->set_rules('bagian','Bagian');
+        $this->form_validation->set_rules('subag','Sub bag');
+        $this->form_validation->set_rules('basisdata','Basisdata');
+        $this->form_validation->set_rules('parameter','Parameter');
+        $this->form_validation->set_rules('tipe','Tipe');
+        $this->form_validation->set_rules('panjang','Panjang');
+        $this->form_validation->set_rules('id_ded','ID DED','required');
+        $this->form_validation->set_rules('id_detail','ID Detail','required');
+
+        if($this->form_validation->run() == FALSE) {
+            $this->session->set_flashdata('error','Data anda tidak berhasil disimpan, cek data yang Anda masukkan');
+            redirect_back();  
+        }else{
+
+            $data = array(
+                'id_ded'        => $this->input->post('id_ded'), 
+                'bidang'        => $this->input->post('bidang'), 
+                'biro'          => $this->input->post('biro'), 
+                'bagian'        => $this->input->post('bagian'), 
+                'subag'         => $this->input->post('subag'), 
+                'basisdata'     => $this->input->post('basisdata'), 
+                'parameter'     => $this->input->post('parameter'), 
+                'tipe'          => $this->input->post('tipe'), 
+                'panjang'       => $this->input->post('panjang'), 
+            );
+
+            $id_detail = $this->input->post('id_detail');
+
+            if($this->Ded_m->post_update_ded($id_detail, $data)){
+                $this->session->set_flashdata('sukses','Data anda berhasil diubah');
+                redirect_back(); 
+            }else{
+                $this->session->set_flashdata('error','Data anda tidak berhasil diubah');
+                redirect_back(); 
+            }
+        }
+    }
+
+    public function post_skpa(){
+        $this->form_validation->set_rules('nama_peraturan','Nama Peraturan','required');
+        $this->form_validation->set_rules('unit','Unit');
+        $this->form_validation->set_rules('tupoksi','Tupoksi');
+        $this->form_validation->set_rules('jml_database','Jumlah Database');
+        $this->form_validation->set_rules('regulasi','Regulasi','required');
+
+        if($this->form_validation->run() == FALSE) {
+            $this->session->set_flashdata('error','Data anda tidak berhasil disimpan, cek data yang Anda masukkan');
+            redirect_back();  
+        }else{
+
+            $data = array(
+                'nama_peraturan'    => $this->input->post('nama_peraturan'), 
+                'unit'              => $this->input->post('unit'), 
+                'tupoksi'           => $this->input->post('tupoksi'), 
+                'jml_database'      => $this->input->post('jml_database'), 
+                'regulasi'          => $this->input->post('regulasi'), 
+            );
+
+            if($this->Ded_m->post_data_skpa($data)){
+                $this->session->set_flashdata('sukses','Data anda berhasil disimpan');
+                redirect_back(); 
+            }else{
+                $this->session->set_flashdata('error','Data anda tidak berhasil disimpan');
+                redirect_back(); 
+            }
+        }
+    }
+
+    public function post_update_skpa(){
+        $this->form_validation->set_rules('nama_peraturan','Nama Peraturan','required');
+        $this->form_validation->set_rules('unit','Unit');
+        $this->form_validation->set_rules('tupoksi','Tupoksi');
+        $this->form_validation->set_rules('jml_database','Jumlah Database');
+        $this->form_validation->set_rules('regulasi','Regulasi','required');
+        $this->form_validation->set_rules('id','ID','required');
+
+        if($this->form_validation->run() == FALSE) {
+            $this->session->set_flashdata('error','Data anda tidak berhasil disimpan, cek data yang Anda masukkan');
+            redirect_back();  
+        }else{
+
+            $data = array(
+                'nama_peraturan'    => $this->input->post('nama_peraturan'), 
+                'unit'              => $this->input->post('unit'), 
+                'tupoksi'           => $this->input->post('tupoksi'), 
+                'jml_database'      => $this->input->post('jml_database'), 
+                'regulasi'          => $this->input->post('regulasi'), 
+            );
+            $id = $this->input->post('id');
+            if($this->Ded_m->post_data_update_skpa($id, $data)){
+                $this->session->set_flashdata('sukses','Data anda berhasil disimpan');
+                redirect_back(); 
+            }else{
+                $this->session->set_flashdata('error','Data anda tidak berhasil disimpan');
+                redirect_back(); 
+            }
+        }
+    }
+
+    public function hapus_skpa($id){
+        if($this->Ded_m->hapus_ded($id)){
+            $this->session->set_flashdata('sukses','Data anda berhasil dihapus');
+            redirect_back(); 
+        }else{
+            $this->session->set_flashdata('error','Data anda tidak berhasil dihapus');
+            redirect_back(); 
+        }
+    }
 }
 
 

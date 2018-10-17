@@ -61,8 +61,11 @@ class Masterdata extends CI_Controller
         redirect('masterdata/form1_bidang/'.$id_peraturan);
     }
 
-    public function form2_biro() 
-    {
+    public function form2_biro($id) {
+        $data['id_bidang']   = $id;
+        $id_table = 'id_bidang';
+        $data['nama_bidang'] = $this->Masterdata_m->get_all_data_by_id('tbl_bidang', $id, 'id_bidang')->result()[0]->nama_bidang;
+        $data['bidang'] = $this->Masterdata_m->get_all_data_by_id('tbl_biro', $id, $id_table)->result();
         $this->template->load('template','masterdata/form2_biro', $data);
     }
 

@@ -2,6 +2,16 @@
     <h2 class="text-center"> Dashboard Admin</h2>
 </div><br>
 <div class="card-group">
+    <?php
+    $u=0;
+    $t=0;
+    $e=0;
+        foreach ($ded as $d) {
+             $u = $u + $d->unit;
+             $t = $t + $d->tupoksi;
+             $e = $e + $d->jml_database;
+        }
+    ?>
     <!-- Card -->
     <div class="card">
         <div class="card-body">
@@ -15,7 +25,7 @@
                     Total SKPA
                 </div>
                 <div class="ml-auto">
-                    <h2 class="m-b-0 font-light">23</h2>
+                    <h2 class="m-b-0 font-light"><?php echo $jumlah_skpa;?></h2>
                 </div>
             </div>
         </div>
@@ -32,7 +42,7 @@
                     Total Unit
                 </div>
                 <div class="ml-auto">
-                    <h2 class="m-b-0 font-light">113</h2>
+                    <h2 class="m-b-0 font-light"><?php echo $u;?></h2>
                 </div>
             </div>
         </div>
@@ -52,7 +62,7 @@
 
                 </div>
                 <div class="ml-auto">
-                    <h2 class="m-b-0 font-light">43</h2>
+                    <h2 class="m-b-0 font-light"><?php echo $t;?></h2>
                 </div>
             </div>
         </div>
@@ -72,7 +82,7 @@
 
                 </div>
                 <div class="ml-auto">
-                    <h2 class="m-b-0 font-light">63</h2>
+                    <h2 class="m-b-0 font-light"><?php echo $e;?></h2>
                 </div>
             </div>
         </div>

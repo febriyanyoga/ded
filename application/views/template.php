@@ -252,7 +252,7 @@
     <script src="<?php echo base_url()?>assets/assets/extra-libs/DataTables/datatables.min.js"></script>
     <script src="<?php echo base_url()?>/assets/dist/js/pages/datatable/datatable-advanced.init.js"></script>
     <script src="<?php echo base_url()?>/assets/dist/js/pages/datatable/datatable-basic.init.js"></script>
-        <!-- start - This is for export functionality only -->
+    <!-- start - This is for export functionality only -->
     <script src="https://cdn.datatables.net/buttons/1.5.1/js/dataTables.buttons.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.flash.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>

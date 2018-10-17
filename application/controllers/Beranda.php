@@ -19,6 +19,7 @@ class Beranda extends CI_Controller
     {
         $data = array();
         $data['ded'] = $this->Beranda_model->get_all_ded()->result();
+        $data['jumlah_skpa'] = $this->Beranda_model->get_all_ded()->num_rows();
         $this->template->load('template','auth/beranda', $data);
     } 
     
