@@ -1,82 +1,92 @@
-
-                <div class="card my-3 no-b">
-                    <div class="card-body">
-                        <div class="card-title"><h2>KELOLA DATA USER</h2></div><br>
-
-        <div style="padding-bottom: 10px;"'>
-        <?php echo anchor(site_url('user/create'), '<i class="icon-wpforms" aria-hidden="true"></i> Tambah Data', 'class="btn btn-danger btn-sm" style="margin-left: 2%;"'); ?>
-        </div><br>
-                        <table class="table table-bordered table-hover  table-striped" id="mytable" data-options='{ "paging": false; "searching":false}'>
+<div class="card-title">
+    <h2 class="text-center"> Kelola Data User</h2>
+</div><br>
+<!-- File export -->
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#tambahpengguna"><i class="fas fa-plus-circle"></i> Tambah Pengguna</button>
+                <br>
+                <p>
+                    <div class="table-responsive">
+                        <table id="file_export" class="table table-striped table-bordered display">
                             <thead>
-                <tr>
-                    <th width="30px">No</th>
-            <th>Full Name</th>
-            <th>Email</th>
-            <th>Nama Level</th>
-            <th>Status</th>
-            <th width="200px">Action</th>
-                </tr>
+                                <tr>
+                                    <th class="text-center">No</th>
+                                    <th class="text-center">Nama</th>
+                                    <th class="text-center">Email</th>
+                                    <th class="text-center">Level</th>
+                                    <th class="text-center">Status</th>
+                                    <th class="text-center">Action</th>
+                                </tr>
                             </thead>
+                            <tbody>
+                                    <tr>
+                                        <td class="text-center">
+                                            tes
+                                        </td>
+                                        <td class="text-center">
+                                            tes
+                                        </td>
+                                        <td class="text-center">
+                                            tes
+                                        </td>
+                                        <td class="text-center">
+                                            tes
+                                        </td>
+                                        <td class="text-center">
+                                            tes
+                                        </td>
+                                        <td class="text-center">
+                                            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#lihatskpa"><i class="fas fa-eye"></i> </button>
+                                            <button type="button" class="btn btn-success"><i class="far fa-edit"></i> </button>
+                                            <button type="button" class="btn btn-danger"><i class="mdi mdi-close"></i> </button>
+                                        </td>
+                                    </tr>
+                            </tbody>
                         </table>
                     </div>
-                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
+<div class="modal fade" id="tambahpengguna" tabindex="-1" role="dialog" aria-labelledby="tambahpengguna">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="exampleModalLabel1">Tambah User</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="recipient-name" class="control-label">Nama:</label>
+                        <input type="text" class="form-control" id="recipient-name1">
+                    </div>
+                    <div class="form-group">
+                        <label for="recipient-name" class="control-label">Email:</label>
+                        <input type="text" class="form-control" id="recipient-name1">
+                    </div>
+                    <div class="form-group">
+                        <label for="recipient-name" class="control-label">Level:</label>
+                        <input type="text" class="form-control" id="recipient-name1">
+                    </div>
+                    <div class="form-group">
+                        <label for="recipient-name" class="control-label">Status:</label>
+                        <input type="text" class="form-control" id="recipient-name1">
+                    </div>   
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
+                <button type="button" class="btn btn-danger">Simpan</button>
+            </div>
+        </div>
+    </div>
+</div>
 
-
-                 <script src="<?php echo base_url('assets/js/jquery-1.11.2.min.js') ?>"></script>
-        <script src="<?php echo base_url('assets/datatables/jquery.dataTables.js') ?>"></script>
-        <script src="<?php echo base_url('assets/datatables/dataTables.bootstrap.js') ?>"></script>
-        <script type="text/javascript">
-            $(document).ready(function() {
-                $.fn.dataTableExt.oApi.fnPagingInfo = function(oSettings)
-                {
-                    return {
-                        "iStart": oSettings._iDisplayStart,
-                        "iEnd": oSettings.fnDisplayEnd(),
-                        "iLength": oSettings._iDisplayLength,
-                        "iTotal": oSettings.fnRecordsTotal(),
-                        "iFilteredTotal": oSettings.fnRecordsDisplay(),
-                        "iPage": Math.ceil(oSettings._iDisplayStart / oSettings._iDisplayLength),
-                        "iTotalPages": Math.ceil(oSettings.fnRecordsDisplay() / oSettings._iDisplayLength)
-                    };
-                };
-
-                var t = $("#mytable").dataTable({
-                    initComplete: function() {
-                        var api = this.api();
-                        $('#mytable_filter input')
-                                .off('.DT')
-                                .on('keyup.DT', function(e) {
-                                    if (e.keyCode == 13) {
-                                        api.search(this.value).draw();
-                            }
-                        });
-                    },
-                    oLanguage: {
-                        sProcessing: "loading..."
-                    },
-                    processing: true,
-                    serverSide: true,
-                    ajax: {"url": "user/json", "type": "POST"},
-                    columns: [
-                        {
-                            "data": "id_users",
-                            "orderable": false
-                        },{"data": "full_name"},{"data": "email"},{"data": "nama_level"},{"data": "is_aktif"},
-                        {
-                            "data" : "action",
-                            "orderable": false,
-                            "className" : "text-center"
-                        }
-                    ],
-                    order: [[0, 'desc']],
-                    rowCallback: function(row, data, iDisplayIndex) {
-                        var info = this.fnPagingInfo();
-                        var page = info.iPage;
-                        var length = info.iLength;
-                        var index = page * length + (iDisplayIndex + 1);
-                        $('td:eq(0)', row).html(index);
-                    }
-                });
-            });
-        </script>
+<script src="<?php echo base_url('assets/js/jquery-1.11.2.min.js') ?>"></script>
+<script src="<?php echo base_url('assets/datatables/jquery.dataTables.js') ?>"></script>
+<script src="<?php echo base_url('assets/datatables/dataTables.bootstrap.js') ?>"></script>
