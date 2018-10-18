@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.1
+-- version 4.6.6
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Waktu pembuatan: 17 Okt 2018 pada 02.36
--- Versi server: 10.1.33-MariaDB
--- Versi PHP: 7.2.6
+-- Host: localhost
+-- Generation Time: 18 Okt 2018 pada 06.40
+-- Versi Server: 5.7.17-log
+-- PHP Version: 5.6.30
 
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
 
@@ -33,15 +32,15 @@ CREATE TABLE `tbl_ded` (
   `unit` varchar(50) NOT NULL,
   `tupoksi` varchar(50) NOT NULL,
   `jml_database` varchar(50) NOT NULL,
-  `regualasi` varchar(70) NOT NULL
-) ;
+  `regulasi` varchar(70) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data untuk tabel `tbl_ded`
 --
 
-INSERT INTO `tbl_ded` (`id`, `nama_peraturan`, `unit`, `tupoksi`, `jml_database`, `regualasi`) VALUES
-(1, 'Sekretariat Daerah', '82', '243', '12', ''),
+INSERT INTO `tbl_ded` (`id`, `nama_peraturan`, `unit`, `tupoksi`, `jml_database`, `regulasi`) VALUES
+(1, 'Sekretariat Daerah', '82', '243', '12', 'Pergub Aceh No. 70'),
 (2, 'Sekretariat Dewan Perwakilan Rakyat Aceh', '12', '53', '13', ''),
 (3, 'Inspektorat Aceh', '3', '18', '11', ''),
 (4, 'Badan Perencanaan Pembangunan Daerah Aceh', '21', '133', '19', ''),
@@ -105,8 +104,8 @@ CREATE TABLE `tbl_detail` (
   `basisdata` varchar(200) NOT NULL,
   `parameter` varchar(200) NOT NULL,
   `tipe` varchar(200) NOT NULL,
-  `panjang` int(10) NOT NULL
-) ;
+  `panjang` int(10) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -117,9 +116,16 @@ CREATE TABLE `tbl_detail` (
 CREATE TABLE `tbl_dokumen` (
   `id_dokumen` int(11) NOT NULL,
   `id_ded` int(11) NOT NULL,
-  `nama_dokumen` int(11) NOT NULL,
-  `file_dokumen` int(11) NOT NULL
-) ;
+  `nama_dokumen` varchar(200) NOT NULL,
+  `nama_file` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data untuk tabel `tbl_dokumen`
+--
+
+INSERT INTO `tbl_dokumen` (`id_dokumen`, `id_ded`, `nama_dokumen`, `nama_file`) VALUES
+(7, 1, 'dokumen sekda aceh', '2626bcb38a6ea459928b99cc7aecc14e.pdf');
 
 -- --------------------------------------------------------
 
@@ -134,7 +140,7 @@ CREATE TABLE `tbl_menu` (
   `icon` varchar(50) NOT NULL,
   `is_main_menu` int(11) NOT NULL,
   `is_aktif` enum('y','n') NOT NULL
-) ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -145,9 +151,10 @@ CREATE TABLE `tbl_menu` (
 CREATE TABLE `tbl_note` (
   `id_note` int(10) NOT NULL,
   `id_ded` int(10) NOT NULL,
+  `judul` varchar(100) NOT NULL,
   `note` varchar(1000) NOT NULL,
   `tanggal` date NOT NULL
-) ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -163,7 +170,7 @@ CREATE TABLE `tbl_profil` (
   `kabupaten` varchar(50) NOT NULL,
   `no_telp` varchar(50) NOT NULL,
   `logo` varchar(50) NOT NULL
-) ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data untuk tabel `tbl_profil`
@@ -183,10 +190,10 @@ CREATE TABLE `tbl_user` (
   `full_name` varchar(50) NOT NULL,
   `email` varchar(50) NOT NULL,
   `password` varchar(50) NOT NULL,
-  `images` varchar(50) NOT NULL,
+  `images` varchar(50) DEFAULT NULL,
   `id_user_level` int(11) NOT NULL,
   `is_aktif` enum('y','n') NOT NULL
-) ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data untuk tabel `tbl_user`
@@ -194,7 +201,7 @@ CREATE TABLE `tbl_user` (
 
 INSERT INTO `tbl_user` (`id_users`, `full_name`, `email`, `password`, `images`, `id_user_level`, `is_aktif`) VALUES
 (1, 'Ferry Ferdana Putra', 'ffpjos@gmail.com', '827ccb0eea8a706c4c34a16891f84e7b', '', 1, 'y'),
-(3, 'tes', 'tes@gmail.com', '827ccb0eea8a706c4c34a16891f84e7b', '', 2, 'y');
+(4, 'febriyan yoga pratama', 'febriyanyoga@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', NULL, 2, 'y');
 
 -- --------------------------------------------------------
 
@@ -205,7 +212,7 @@ INSERT INTO `tbl_user` (`id_users`, `full_name`, `email`, `password`, `images`, 
 CREATE TABLE `tbl_user_level` (
   `id_user_level` int(11) NOT NULL,
   `nama_level` varchar(30) NOT NULL
-) ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data untuk tabel `tbl_user_level`
@@ -220,106 +227,97 @@ INSERT INTO `tbl_user_level` (`id_user_level`, `nama_level`) VALUES
 --
 
 --
--- Indeks untuk tabel `tbl_ded`
+-- Indexes for table `tbl_ded`
 --
 ALTER TABLE `tbl_ded`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `tbl_detail`
+-- Indexes for table `tbl_detail`
 --
 ALTER TABLE `tbl_detail`
   ADD PRIMARY KEY (`id_detail`);
 
 --
--- Indeks untuk tabel `tbl_dokumen`
+-- Indexes for table `tbl_dokumen`
 --
 ALTER TABLE `tbl_dokumen`
   ADD PRIMARY KEY (`id_dokumen`);
 
 --
--- Indeks untuk tabel `tbl_menu`
+-- Indexes for table `tbl_menu`
 --
 ALTER TABLE `tbl_menu`
   ADD PRIMARY KEY (`id_menu`);
 
 --
--- Indeks untuk tabel `tbl_note`
+-- Indexes for table `tbl_note`
 --
 ALTER TABLE `tbl_note`
   ADD PRIMARY KEY (`id_note`);
 
 --
--- Indeks untuk tabel `tbl_profil`
+-- Indexes for table `tbl_profil`
 --
 ALTER TABLE `tbl_profil`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `tbl_user`
+-- Indexes for table `tbl_user`
 --
 ALTER TABLE `tbl_user`
   ADD PRIMARY KEY (`id_users`);
 
 --
--- Indeks untuk tabel `tbl_user_level`
+-- Indexes for table `tbl_user_level`
 --
 ALTER TABLE `tbl_user_level`
   ADD PRIMARY KEY (`id_user_level`);
 
 --
--- AUTO_INCREMENT untuk tabel yang dibuang
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT untuk tabel `tbl_ded`
+-- AUTO_INCREMENT for table `tbl_ded`
 --
 ALTER TABLE `tbl_ded`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 --
--- AUTO_INCREMENT untuk tabel `tbl_detail`
+-- AUTO_INCREMENT for table `tbl_detail`
 --
 ALTER TABLE `tbl_detail`
-  MODIFY `id_detail` int(10) NOT NULL AUTO_INCREMENT;
-
+  MODIFY `id_detail` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
--- AUTO_INCREMENT untuk tabel `tbl_dokumen`
+-- AUTO_INCREMENT for table `tbl_dokumen`
 --
 ALTER TABLE `tbl_dokumen`
-  MODIFY `id_dokumen` int(11) NOT NULL AUTO_INCREMENT;
-
+  MODIFY `id_dokumen` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
--- AUTO_INCREMENT untuk tabel `tbl_menu`
+-- AUTO_INCREMENT for table `tbl_menu`
 --
 ALTER TABLE `tbl_menu`
   MODIFY `id_menu` int(11) NOT NULL AUTO_INCREMENT;
-
 --
--- AUTO_INCREMENT untuk tabel `tbl_note`
+-- AUTO_INCREMENT for table `tbl_note`
 --
 ALTER TABLE `tbl_note`
-  MODIFY `id_note` int(10) NOT NULL AUTO_INCREMENT;
-
+  MODIFY `id_note` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
--- AUTO_INCREMENT untuk tabel `tbl_profil`
+-- AUTO_INCREMENT for table `tbl_profil`
 --
 ALTER TABLE `tbl_profil`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
--- AUTO_INCREMENT untuk tabel `tbl_user`
+-- AUTO_INCREMENT for table `tbl_user`
 --
 ALTER TABLE `tbl_user`
-  MODIFY `id_users` int(11) NOT NULL AUTO_INCREMENT;
-
+  MODIFY `id_users` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
--- AUTO_INCREMENT untuk tabel `tbl_user_level`
+-- AUTO_INCREMENT for table `tbl_user_level`
 --
 ALTER TABLE `tbl_user_level`
-  MODIFY `id_user_level` int(11) NOT NULL AUTO_INCREMENT;
-COMMIT;
-
+  MODIFY `id_user_level` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
