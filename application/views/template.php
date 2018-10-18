@@ -38,11 +38,11 @@
                     <!-- ============================================================== -->
                     <!-- Logo -->
                     <!-- ============================================================== -->
-                    <a class="navbar-brand" href="index.html">
+                    <a class="navbar-brand" href="<?php echo base_url('beranda')?>" style="background-color: #03a9f4;">
                         <!-- Logo icon -->
     
-                        <span class="logo-text">
-                           
+                        <span class="logo-text" style="font-size: 12pt; color: white; text-decoration: bold; background-color: #03a9f4;">
+                           <?php echo getInfoRS('nama_sistem')?>
                         </span>
                     </a>
                     <!-- ============================================================== -->
@@ -109,7 +109,7 @@
                                 </div>
                             
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="javascript:void(0)">
+                                <a class="dropdown-item" href="<?php echo base_url('Auth/logout')?>">
                                     <i class="fa fa-power-off m-r-5 m-l-5"></i> Logout</a>
                                 <div class="dropdown-divider"></div>
                             </div>
@@ -134,62 +134,76 @@
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav">
                         <br>
+                        <?php 
+                        if($this->session->userdata('id_user_level') == 1){
+                            ?>
+                                <li class="sidebar-item">
+                                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<?php echo base_url()?>beranda" aria-expanded="false">
+                                        <i class="icon-Car-Wheel"></i>
+                                        <span class="hide-menu">Dashboards </span>
+                                    </a>
+                                </li>
+                                <li class="nav-small-cap">
+                                    <i class="mdi mdi-dots-horizontal"></i>
+                                    <span class="hide-menu">Master Data</span>
+                                </li>
+                                <li class="sidebar-item">
+                                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<?php echo base_url()?>skpa
+                                           " aria-expanded="false">
+                                        <i class="icon-Receipt"></i>
+                                        <span class="hide-menu">Data SKPA</span>
+                                    </a>
+                                </li>
+                                <li class="sidebar-item">
+                                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<?php echo base_url()?>ded
+                                           " aria-expanded="false">
+                                        <i class="icon-Receipt"></i>
+                                        <span class="hide-menu">Data DED</span>
+                                    </a>
+                                </li>
+                                <li class="nav-small-cap">
+                                    <i class="mdi mdi-dots-horizontal"></i>
+                                    <span class="hide-menu">Monitoring</span>
+                                </li>
+                                <li class="sidebar-item">
+                                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<?php echo base_url()?>monitoring
+                                           " aria-expanded="false">
+                                        <i class="mdi mdi-content-paste"></i>
+                                        <span class="hide-menu">SKPA Note</span>
+                                    </a>
+                                </li>
+                                <li class="nav-small-cap">
+                                    <i class="mdi mdi-dots-horizontal"></i>
+                                    <span class="hide-menu">Pengaturan</span>
+                                </li>
+                                <li class="sidebar-item">
+                                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<?php echo base_url()?>user
+                                           " aria-expanded="false">
+                                        <i class="icon-Add-User"></i>
+                                        <span class="hide-menu">Data User</span>
+                                    </a>
+                                </li>
+                                <li class="sidebar-item">
+                                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<?php echo base_url()?>profile/update/1
+                                           " aria-expanded="false">
+                                        <i class="icon-Wrench"></i>
+                                        <span class="hide-menu">Data sistem</span>
+                                    </a>
+                                </li>
+                            <?php
+                        }else{
+                            ?>
+                            <li class="sidebar-item">
+                                <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<?php echo base_url()?>beranda" aria-expanded="false">
+                                    <i class="icon-Car-Wheel"></i>
+                                    <span class="hide-menu">Dashboards </span>
+                                </a>
+                            </li>
+                            <?php
+                        }
+                        ?>
                         <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<?php echo base_url()?>beranda" aria-expanded="false">
-                                <i class="icon-Car-Wheel"></i>
-                                <span class="hide-menu">Dashboards </span>
-                            </a>
-                        </li>
-                        <li class="nav-small-cap">
-                            <i class="mdi mdi-dots-horizontal"></i>
-                            <span class="hide-menu">Master Data</span>
-                        </li>
-                        <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<?php echo base_url()?>skpa
-                                   " aria-expanded="false">
-                                <i class="icon-Receipt"></i>
-                                <span class="hide-menu">Data SKPA</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<?php echo base_url()?>ded
-                                   " aria-expanded="false">
-                                <i class="icon-Receipt"></i>
-                                <span class="hide-menu">Data DED</span>
-                            </a>
-                        </li>
-                        <li class="nav-small-cap">
-                            <i class="mdi mdi-dots-horizontal"></i>
-                            <span class="hide-menu">Monitoring</span>
-                        </li>
-                        <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<?php echo base_url()?>monitoring
-                                   " aria-expanded="false">
-                                <i class="mdi mdi-content-paste"></i>
-                                <span class="hide-menu">SKPA Note</span>
-                            </a>
-                        </li>
-                        <li class="nav-small-cap">
-                            <i class="mdi mdi-dots-horizontal"></i>
-                            <span class="hide-menu">Pengaturan</span>
-                        </li>
-                        <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<?php echo base_url()?>user
-                                   " aria-expanded="false">
-                                <i class="icon-Add-User"></i>
-                                <span class="hide-menu">Data User</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<?php echo base_url()?>profile/update/1
-                                   " aria-expanded="false">
-                                <i class="icon-Wrench"></i>
-                                <span class="hide-menu">Data sistem</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="authentication-login1.html
-                                   " aria-expanded="false">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<?php echo base_url('Auth/logout')?>" aria-expanded="false">
                                 <i class="mdi mdi-directions"></i>
                                 <span class="hide-menu">Log Out</span>
                             </a>
@@ -200,24 +214,13 @@
             </div>
             <!-- End Sidebar scroll-->
         </aside>
-        <!-- ============================================================== -->
-        <!-- End Left Sidebar - style you can find in sidebar.scss  -->
-        <!-- ============================================================== -->
-        <!-- ============================================================== -->
-        <!-- Page wrapper  -->
-        <!-- ============================================================== -->
         <div class="page-wrapper">
-            <!-- Container fluid  -->
-            <!-- ============================================================== -->
             <div class="container-fluid">
-                <!-- ============================================================== -->
-                <!-- Info box -->
-                <!-- ============================================================== -->
-                    <!-- column -->
+     
                     <div class="col-lg-12">
                     <?php
-            echo $contents;
-            ?>
+                    echo $contents;
+                    ?>
                     </div>
                 </div>
             </div>
@@ -255,7 +258,7 @@
     <!-- start - This is for export functionality only -->
     <script src="<?php echo base_url()?>assets/js/dataTables.buttons.min.js"></script>
     <script src="<?php echo base_url()?>assets/js/buttons.flash.min.js"></script>
-    <script src="<?php echo base_url()?>assets/jszip.min.js"></script>
+    <script src="<?php echo base_url()?>assets/js/jszip.min.js"></script>
     <script src="<?php echo base_url()?>assets/js/pdfmake.min.js"></script>
     <script src="<?php echo base_url()?>assets/js/vfs_fonts.js"></script>
     <script src="<?php echo base_url()?>assets/js/buttons.html5.min.js"></script>

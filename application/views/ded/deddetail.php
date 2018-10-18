@@ -104,29 +104,29 @@
                                                 <div class="modal-body">
                                                     <div class="form-group">
                                                         <label for="recipient-name" class="control-label">Bidang:</label>
-                                                        <input type="text" class="form-control" id="recipient-name1" name="bidang" value="<?php echo $ded->bidang?>">
-                                                        <input type="hidden" class="form-control" id="recipient-name1" name="id_ded" value="<?php echo $id_ded?>" required>
-                                                        <input type="hidden" class="form-control" id="recipient-name1" name="id_detail" value="<?php echo $ded->id_detail?>" required>
+                                                        <input type="text" class="form-control"  name="bidang" value="<?php echo $ded->bidang?>" required>
+                                                        <input type="hidden" class="form-control"  name="id_ded" value="<?php echo $id_ded?>" required>
+                                                        <input type="hidden" class="form-control"  name="id_detail" value="<?php echo $ded->id_detail?>" required>
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="recipient-name" class="control-label">Biro:</label>
-                                                        <input type="text" class="form-control" id="recipient-name1" name="biro" value="<?php echo $ded->biro;?>">
+                                                        <input type="text" class="form-control"  name="biro" value="<?php echo $ded->biro;?>">
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="recipient-name" class="control-label">Bagian:</label>
-                                                        <input type="text" class="form-control" id="recipient-name1" name="bagian" value="<?php echo $ded->bagian;?>">
+                                                        <input type="text" class="form-control"  name="bagian" value="<?php echo $ded->bagian;?>" required>
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="recipient-name" class="control-label">Sub Bag:</label>
-                                                        <input type="text" class="form-control" id="recipient-name1" name="subag" value="<?php echo $ded->subag;?>">
+                                                        <input type="text" class="form-control"  name="subag" value="<?php echo $ded->subag;?>">
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="recipient-name" class="control-label">Entitas Database:</label>
-                                                        <input type="text" class="form-control" id="recipient-name1" name="basisdata" value="<?php echo $ded->basisdata;?>">
+                                                        <input type="text" class="form-control"  name="basisdata" value="<?php echo $ded->basisdata;?>">
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="recipient-name" class="control-label">Parameter:</label>
-                                                        <input type="text" class="form-control" id="recipient-name1" name="parameter" value="<?php echo $ded->parameter;?>">
+                                                        <input type="text" class="form-control"  name="parameter" value="<?php echo $ded->parameter;?>">
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="recipient-name" class="control-label">Tipe:</label>
@@ -153,7 +153,7 @@
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="recipient-name" class="control-label">Panjang:</label>
-                                                        <input type="number" class="form-control" id="recipient-name1" name="panjang" value="<?php echo $ded->panjang;?>">
+                                                        <input type="number" class="form-control"  name="panjang" value="<?php echo $ded->panjang;?>">
                                                     </div>
                                                 </div>
                                                 <div class="modal-footer">
@@ -187,28 +187,28 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="recipient-name" class="control-label">Bidang:</label>
-                        <input type="text" class="form-control" id="recipient-name1" name="bidang">
-                        <input type="hidden" class="form-control" id="recipient-name1" name="id_ded" value="<?php echo $id_ded?>" required>
+                        <input type="text" class="form-control"  name="bidang" required>
+                        <input type="hidden" class="form-control"  name="id_ded" value="<?php echo $id_ded?>" required>
                     </div>
                     <div class="form-group">
                         <label for="recipient-name" class="control-label">Biro:</label>
-                        <input type="text" class="form-control" id="recipient-name1" name="biro">
+                        <input type="text" class="form-control"  name="biro">
                     </div>
                     <div class="form-group">
                         <label for="recipient-name" class="control-label">Bagian:</label>
-                        <input type="text" class="form-control" id="recipient-name1" name="bagian">
+                        <input type="text" class="form-control"  name="bagian" required>
                     </div>
                     <div class="form-group">
                         <label for="recipient-name" class="control-label">Sub Bag:</label>
-                        <input type="text" class="form-control" id="recipient-name1" name="subag">
+                        <input type="text" class="form-control"  name="subag">
                     </div>
                     <div class="form-group">
                         <label for="recipient-name" class="control-label">Entitas Database:</label>
-                        <input type="text" class="form-control" id="recipient-name1" name="basisdata">
+                        <input type="text" class="form-control"  name="basisdata">
                     </div>
                     <div class="form-group">
                         <label for="recipient-name" class="control-label">Parameter:</label>
-                        <input type="text" class="form-control" id="recipient-name1" name="parameter">
+                        <input type="text" class="form-control"  name="parameter">
                     </div>
                     <div class="form-group">
                         <label for="recipient-name" class="control-label">Tipe:</label>
@@ -221,7 +221,7 @@
                     </div>
                     <div class="form-group">
                         <label for="recipient-name" class="control-label">Panjang:</label>
-                        <input type="number" class="form-control" id="recipient-name1" name="panjang">
+                        <input type="number" class="form-control"  name="panjang">
                     </div>
                 </div>
                 <div class="modal-footer">

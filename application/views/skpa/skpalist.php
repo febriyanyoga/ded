@@ -79,23 +79,23 @@
                                                     <form>
                                                         <div class="form-group">
                                                             <label for="recipient-name" class="control-label">Nama SKPA:</label>
-                                                            <input type="text" class="form-control" id="recipient-name1" value="<?php echo $d->nama_peraturan;?>" readonly>
+                                                            <input type="text" class="form-control"  value="<?php echo $d->nama_peraturan;?>" readonly>
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="recipient-name" class="control-label">Jumlah Unit:</label>
-                                                            <input type="text" class="form-control" id="recipient-name1" value="<?php echo $d->unit;?>" readonly>
+                                                            <input type="text" class="form-control"  value="<?php echo $d->unit;?>" readonly>
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="recipient-name" class="control-label">Jumlah Tupoksi:</label>
-                                                            <input type="text" class="form-control" id="recipient-name1" value="<?php echo $d->tupoksi;?>" readonly>
+                                                            <input type="text" class="form-control"  value="<?php echo $d->tupoksi;?>" readonly>
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="recipient-name" class="control-label">Jumlah Database:</label>
-                                                            <input type="text" class="form-control" id="recipient-name1" value="<?php echo $d->jml_database;?>" readonly>
+                                                            <input type="text" class="form-control"  value="<?php echo $d->jml_database;?>" readonly>
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="recipient-name" class="control-label">Regulasi:</label>
-                                                            <input type="text" class="form-control" id="recipient-name1" value="<?php echo $d->regulasi?>" readonly>
+                                                            <input type="text" class="form-control"  value="<?php echo $d->regulasi?>" readonly>
                                                         </div>
                                                     </form>
                                                 </div>
@@ -119,24 +119,24 @@
                                                     <div class="modal-body">
                                                         <div class="form-group">
                                                             <label for="recipient-name" class="control-label">Nama SKPA:</label>
-                                                            <input type="text" class="form-control" id="recipient-name1" name="nama_peraturan" value="<?php echo $d->nama_peraturan;?>">
-                                                            <input type="hidden" class="form-control" id="recipient-name1" name="id" value="<?php echo $d->id;?>">
+                                                            <input type="text" class="form-control"  name="nama_peraturan" value="<?php echo $d->nama_peraturan;?>">
+                                                            <input type="hidden" class="form-control"  name="id" value="<?php echo $d->id;?>">
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="recipient-name" class="control-label">Jumlah Unit:</label>
-                                                            <input type="text" class="form-control" id="recipient-name1" name="unit" value="<?php echo $d->unit;?>">
+                                                            <input type="text" class="form-control"  name="unit" value="<?php echo $d->unit;?>">
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="recipient-name" class="control-label">Jumlah Tupoksi:</label>
-                                                            <input type="text" class="form-control" id="recipient-name1" name="tupoksi" value="<?php echo $d->tupoksi;?>">
+                                                            <input type="text" class="form-control"  name="tupoksi" value="<?php echo $d->tupoksi;?>">
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="recipient-name" class="control-label">Jumlah Database:</label>
-                                                            <input type="text" class="form-control" id="recipient-name1" name="jml_database" value="<?php echo $d->jml_database;?>">
+                                                            <input type="text" class="form-control"  name="jml_database" value="<?php echo $d->jml_database;?>">
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="recipient-name" class="control-label">Regulasi:</label>
-                                                            <input type="text" class="form-control" id="recipient-name1" name="regulasi" value="<?php echo $d->regulasi?>" required>
+                                                            <input type="text" class="form-control"  name="regulasi" value="<?php echo $d->regulasi?>" required>
                                                         </div>
                                                     </div>
                                                     <div class="modal-footer">
@@ -171,23 +171,23 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="recipient-name" class="control-label">Nama SKPA:</label>
-                            <input type="text" class="form-control" id="recipient-name1" name="nama_peraturan" required>
+                            <input type="text" class="form-control"  name="nama_peraturan" required>
                         </div>
                         <div class="form-group">
                             <label for="recipient-name" class="control-label">Jumlah Unit:</label>
-                            <input type="number" class="form-control" id="recipient-name1" name="unit">
+                            <input type="number" class="form-control"  name="unit">
                         </div>
                         <div class="form-group">
                             <label for="recipient-name" class="control-label">Jumlah Tupoksi:</label>
-                            <input type="number" class="form-control" id="recipient-name1" name="tupoksi">
+                            <input type="number" class="form-control"  name="tupoksi">
                         </div>
                         <div class="form-group">
                             <label for="recipient-name" class="control-label">Jumlah Database:</label>
-                            <input type="number" class="form-control" id="recipient-name1" name="jml_database">
+                            <input type="number" class="form-control"  name="jml_database">
                         </div>
                         <div class="form-group">
                             <label for="recipient-name" class="control-label">Regulasi:</label>
-                            <input type="text" class="form-control" id="recipient-name1" name="regulasi" required>
+                            <input type="text" class="form-control"  name="regulasi" required>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -215,15 +215,16 @@
                     </div>
 
                     <div class="modal-body">
-                        <form action="<?php echo base_url('Skpa/post_dokumen')?>" method="post">
+                        <?php echo form_open_multipart('Skpa/post_dokumen');?>
+                        <form action="<?php echo base_url('Skpa/post_dokumen')?>" enctype="multipart/form-data" method="post">
                             <div class="form-group">
                                 <label for="recipient-name" class="control-label">Nama Dokumen:</label>
-                                <input type="text" class="form-control" id="recipient-name1" name="nama_dokumen">
-                                <input type="text" class="form-control" id="recipient-name1" name="id_ded" value="<?php echo $key->id?>">
+                                <input type="text" class="form-control"  name="nama_dokumen">
+                                <input type="hidden" class="form-control"  name="id_ded" value="<?php echo $key->id?>">
                             </div>
                             <div class="form-group">
                                 <label>Unggah Dokumen</label>
-                                <input type="file" class="form-control" name="file">
+                                <input type="file" class="form-control" name="file_upload">
                             </div>
                             <div class="form-group">
                                 <input type="submit" name="submit" class="btn btn-default" value="Simpan">
@@ -249,8 +250,8 @@
                                         <td><?php echo $i;?></td>
                                         <td><?php echo $key->nama_dokumen;?></td>
                                         <td class="text-center">
-                                            <a href="<?php echo base_url().$key->file_dokumen?>" target="_blank" style="color: white;" class="btn btn-info"><i class="fas fa-download"></i> </a>
-                                            <button type="button" class="btn btn-danger"><i class="mdi mdi-close"></i> </button>
+                                            <a href="<?php echo base_url()."uploads/".$key->nama_file?>" target="_blank" style="color: white;" class="btn btn-info"><i class="fas fa-download"></i></a>
+                                            <a href="<?php echo base_url('skpa/delete/').$key->id_dokumen?>" onClick="return confirm('Anda yakin akan menghapus <?php echo $key->nama_dokumen?>?')" style="color: white;" class="btn btn-danger"><i class="ti-trash"></i></a>
                                         </td>
                                     </tr>
                                     <?php

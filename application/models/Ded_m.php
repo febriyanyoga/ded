@@ -81,17 +81,14 @@ class Ded_m extends CI_Model
 
 
     public function upload(){ // Fungsi untuk upload file ke folder
-        $config['upload_path']      = './uploads';
+        $config['upload_path']      = './uploads/';
         $config['allowed_types']    = 'pdf|doc|docx|zip|xlx|xlsx';
         $config['max_size']         = '50048';
-        $config['remove_space']     = TRUE;
         $config['encrypt_name']     = TRUE;
-        $config['overwrite']        = TRUE;
-        // $new_name = md5($kode_kegiatan);
-        // $config['file_name'] = $new_name;
 
         $this->load->library('upload', $config);
-        if($this->upload->do_upload('file')){ 
+        $this->upload->initialize($config);
+        if($this->upload->do_upload('file_upload')){ 
             // Jika berhasil :
             $return = array('result' => 'success', 'file' => $this->upload->data(), 'error' => '');
             return $return;
@@ -102,13 +99,81 @@ class Ded_m extends CI_Model
         }
     }
 
-    public function save($upload,$id_ded){
+    public function save($upload,$id_ded, $nama_dokumen){
         $data = array(
-            'id_ded'           => $id_ded,
-            'nama_dokumen'     => $upload['file']['file_name'],
+            'id_ded'            => $id_ded,
+            'nama_dokumen'      => $nama_dokumen,
+            'nama_file'         => $upload['file']['file_name'],
         );
         
-        $this->db->insert('tbl_dokumen', $data);
+        if($this->db->insert('tbl_dokumen', $data)){
+            return TRUE;
+        }else{
+            return FALSE;
+        }
     }
+
+    public function hapus_dokumen($id_dokumen){
+        $this->db->where('id_dokumen', $id_dokumen);
+        $this->db->delete('tbl_dokumen');
+        return TRUE;
+    }
+
+
+    // skpa note
+    public function get_all_note_by_skpa($id_ded){
+        $this->db->where('id_ded', $id_ded);
+        return $this->db->get('tbl_note');
+    }
+
+
+    public function post_data_note($data){
+        $this->db->insert('tbl_note', $data);
+        return TRUE;
+    }
+
+    public function post_ubah_data_note($id_note, $data){
+        $this->db->where('id_note', $id_note);
+        $this->db->update('tbl_note', $data);
+        return TRUE;
+    }
+
+    public function hapus_note($id_note){
+        $this->db->where('id_note', $id_note);
+        $this->db->delete('tbl_note');
+        return TRUE;
+    }
+
+
+    // user
+    public function get_all_user_level(){
+        return $this->db->get('tbl_user_level');
+    }
+
+    public function post_data_user($data){
+        $this->db->insert('tbl_user', $data);
+        return TRUE;
+    }
+
+    public function get_all_user(){
+        $this->db->select('*');
+        $this->db->from('tbl_user U');
+        $this->db->join('tbl_user_level L','U.id_user_level = L.id_user_level');
+        return $this->db->get();
+    }
+
+    public function post_update_data_user($id_users, $data){
+        $this->db->where('id_users', $id_users);
+        $this->db->update('tbl_user', $data);
+        return TRUE;
+    }
+
+    public function hapus_user($id_users){
+        $this->db->where('id_users', $id_users);
+        $this->db->delete('tbl_user');
+        return TRUE;
+    }
+    // end user
+
 }
 

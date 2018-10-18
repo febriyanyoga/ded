@@ -31,10 +31,11 @@ class Skpa extends CI_Controller
             $this->session->set_flashdata('error','Data anda tidak berhasil diunggah, cek data yang Anda masukkan');
             redirect_back();  
         }else{
-            $id_ded = $this->input->post('id_ded');
+            $id_ded         = $this->input->post('id_ded');
+            $nama_dokumen   = $this->input->post('nama_dokumen');
             if($upload = $this->Ded_m->upload()){ 
-                if($upload['result'] == "success"){ 
-                    if($this->Ded_m->save($upload,$id_ded)){
+                if($upload['result'] == "success"){
+                    if($this->Ded_m->save($upload,$id_ded, $nama_dokumen)){
                         $this->session->set_flashdata('sukses','Data anda berhasil disimpan');
                         redirect_back(); 
                     }else{
@@ -49,6 +50,27 @@ class Skpa extends CI_Controller
                 $this->session->set_flashdata('error','Data anda tidak berhasil diunggah 3');
                 redirect_back(); 
             }
+        }
+    }
+
+    public function delete($id_dokumen){
+        define('EXT', '.'.pathinfo(__FILE__, PATHINFO_EXTENSION));
+        define('PUBPATH',str_replace(SELF,'',FCPATH));
+
+        $this->db->where('id_dokumen',$id_dokumen);
+        $file = $this->db->get('tbl_dokumen')->row()->nama_file;
+
+        if(unlink(PUBPATH."./uploads/".$file)){
+            if($this->Ded_m->hapus_dokumen($id_dokumen)){
+                $this->session->set_flashdata('sukses','Data anda berhasil dihapus');
+                redirect_back();
+            }else{
+                $this->session->set_flashdata('error','Data anda tidak berhasil dihapus');
+                redirect_back();
+            }
+        }else{
+            $this->session->set_flashdata('error','Data anda tidak berhasil dihapus');
+            redirect_back();
         }
     }
 }
