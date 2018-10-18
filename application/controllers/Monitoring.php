@@ -24,4 +24,4 @@ class Monitoring extends CI_Controller
         $this->template->load('template','monitor/monitor_list', $data);
     } 
     
-    
+}
